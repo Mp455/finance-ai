@@ -20,6 +20,10 @@ model Transaction {
   amount        Decimal                  @db.Decimal(10, 2)
   category      TransactionCategory
   paymentMethod TransactionPaymentMethod
+  date          DateTime
+  createdAt     DateTime                 @default(now())
+  updatedAt     DateTime                 @updatedAt
+  userId        String
 }
 
 enum TransactionType {
