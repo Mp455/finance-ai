@@ -33,5 +33,5 @@ export const upsertTransaction = async (params: upsertTransactionProps) => {
     update: { ...params, userId },
     create: { ...params, userId },
   });
-  revalidatePath("/transact ions");
+  revalidatePath("/transactions");
 };
