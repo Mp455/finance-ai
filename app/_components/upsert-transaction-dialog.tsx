@@ -1,19 +1,20 @@
 import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogTitle,
-  DialogDescription,
-  DialogClose,
-} from "@radix-ui/react-dialog";
-import {
   TRANSACTION_TYPE_OPTIONS,
   TRANSACTION_CATEGORY_OPTIONS,
   TRANSACTION_PAYMENT_METHOD_OPTIONS,
 } from "../_constants/transactions";
 import { MoneyInput } from "./money-input";
 import { DatePicker } from "./ui/date-picker";
-import { DialogHeader, DialogFooter } from "./ui/dialog";
+import {
+  DialogHeader,
+  DialogFooter,
+  DialogTrigger,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+  DialogClose,
+  Dialog,
+} from "./ui/dialog";
 import {
   Form,
   FormControl,
