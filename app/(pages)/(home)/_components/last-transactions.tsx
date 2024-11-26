@@ -30,7 +30,7 @@ const LastTransactions = ({ lastTransactions }: LastTransactionsProps) => {
   return (
     <ScrollArea className="rounded-md border">
       <CardHeader className="flex-row items-center justify-between">
-        <CardTitle>Últimas transações</CardTitle>
+        <CardTitle className="font-bold">Últimas transações</CardTitle>
         <Button variant="outline" className="rounded-full font-bold" asChild>
           <Link href="/transactions">Ver mais</Link>
         </Button>
