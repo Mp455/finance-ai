@@ -39,7 +39,7 @@ const LastTransactions = ({ lastTransactions }: LastTransactionsProps) => {
         {lastTransactions.map((transaction) => (
           <div
             className="flex items-center justify-between"
-            key={transaction.category}
+            key={transaction.id}
           >
             <div className="flex items-center gap-3">
               <div className="rounded-lg bg-white bg-opacity-[3%] p-3">
