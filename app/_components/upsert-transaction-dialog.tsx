@@ -145,7 +145,7 @@ const UpsertTransactionDialog = ({
               name="amount"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Nome</FormLabel>
+                  <FormLabel>Valor</FormLabel>
                   <FormControl>
                     <MoneyInput
                       placeholder="Digite o valor..."
