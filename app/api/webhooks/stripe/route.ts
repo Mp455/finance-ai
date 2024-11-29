@@ -44,27 +44,25 @@ export const POST = async (request: Request) => {
       });
       break;
     }
-    case "customer.subscription.deleted":
-      {
-        // Remover plano premium do usuário
-        const subscription = await stripe.subscriptions.retrieve(
-          event.data.object.id,
-        );
-        const clerkUserId = subscription.metadata.clerk_user_id;
-        if (!clerkUserId) {
-          return NextResponse.error();
-        }
-        await clerkClient().users.updateUser(clerkUserId, {
-          privateMetadata: {
-            stripeCustomerId: null,
-            stripeSubscriptionId: null,
-          },
-          publicMetadata: {
-            subscriptionPlan: null,
-          },
-        });
+    case "customer.subscription.deleted": {
+      // Remover plano premium do usuário
+      const subscription = await stripe.subscriptions.retrieve(
+        event.data.object.id,
+      );
+      const clerkUserId = subscription.metadata.clerk_user_id;
+      if (!clerkUserId) {
+        return NextResponse.error();
       }
-
-      return NextResponse.json({ received: true });
+      await clerkClient().users.updateUser(clerkUserId, {
+        privateMetadata: {
+          stripeCustomerId: null,
+          stripeSubscriptionId: null,
+        },
+        publicMetadata: {
+          subscriptionPlan: null,
+        },
+      });
+    }
   }
+  return NextResponse.json({ received: true });
 };
