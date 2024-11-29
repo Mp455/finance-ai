@@ -10,6 +10,7 @@ import LastTransactions from "./_components/last-transactions";
 import Navbar from "@/app/_components/navbar";
 import { getDashboard } from "@/app/_data/get-dashboard";
 import { canUserAddTransaction } from "@/app/_data/can-user-add-transaction";
+import AiReportButton from "./_components/ai-report-button";
 
 interface HomeProps {
   searchParams: {
@@ -36,6 +37,7 @@ const Home = async ({ searchParams: { month } }: HomeProps) => {
         <div className="flex justify-between">
           <h1 className="text-2xl font-bold">Dashboard</h1>
           <div className="flex items-center gap-3">
+            <AiReportButton month={month} />
             <TimeSelect />
           </div>
         </div>
