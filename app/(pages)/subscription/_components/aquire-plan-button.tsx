@@ -28,7 +28,7 @@ const AquirePlanButton = () => {
   if (hasPremiumPlan) {
     return (
       <Button
-        className="w-full rounded-full font-bold"
+        className="w-full rounded-full"
         onClick={handleAquirePlanClick}
         variant={"link"}
       >
@@ -41,10 +41,7 @@ const AquirePlanButton = () => {
     );
   }
   return (
-    <Button
-      className="w-full rounded-full font-bold"
-      onClick={handleAquirePlanClick}
-    >
+    <Button className="w-full rounded-full" onClick={handleAquirePlanClick}>
       Adquirir Plano
     </Button>
   );
