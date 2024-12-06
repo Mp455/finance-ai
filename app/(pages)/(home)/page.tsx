@@ -11,6 +11,7 @@ import Navbar from "@/app/_components/navbar";
 import { getDashboard } from "@/app/_data/get-dashboard";
 import { canUserAddTransaction } from "@/app/_data/can-user-add-transaction";
 import AiReportButton from "./_components/ai-report-button";
+import { ScrollArea } from "@/app/_components/ui/scroll-area";
 
 interface HomeProps {
   searchParams: {
@@ -34,36 +35,39 @@ const Home = async ({ searchParams: { month } }: HomeProps) => {
   return (
     <>
       <Navbar />
-      <div className="flex h-full flex-col space-y-6 overflow-hidden p-6">
-        <div className="flex justify-between">
-          <h1 className="text-2xl font-bold">Dashboard</h1>
-          <div className="flex items-center gap-3">
-            <AiReportButton
-              month={month}
-              hasPremiumPlan={
-                user.publicMetadata.subscriptionPlan === "premium"
-              }
-            />
-            <TimeSelect />
-          </div>
-        </div>
-        <div className="grid h-full grid-cols-[2fr,1fr] gap-6 overflow-hidden">
-          <div className="flex flex-col gap-6 overflow-hidden">
-            <SummaryCards
-              month={month}
-              {...dashboard}
-              userCanAddTransaction={userCanAddTransaction}
-            />
-            <div className="grid h-full grid-cols-3 grid-rows-1 gap-6 overflow-hidden">
-              <TransactionsPieChart {...dashboard} />
-              <ExpensesPerCategory
-                expensesPerCategory={dashboard.totalExpensePerCategory}
+      <ScrollArea>
+        <div className="flex h-full flex-col space-y-6 pt-3 sm:p-6">
+          <div className="flex justify-between">
+            <h1 className="text-2xl font-bold">Dashboard</h1>
+            <div className="flex items-center gap-3">
+              <AiReportButton
+                month={month}
+                hasPremiumPlan={
+                  user.publicMetadata.subscriptionPlan === "premium"
+                }
               />
+              <TimeSelect />
             </div>
           </div>
-          <LastTransactions lastTransactions={dashboard.lastTransactions} />
+          <div className="grid h-full grid-cols-1 sm:gap-6 sm:overflow-hidden md:grid-cols-[2fr,1fr] xs:gap-3">
+            <div className="flex flex-col gap-6 overflow-hidden">
+              <SummaryCards
+                month={month}
+                {...dashboard}
+                userCanAddTransaction={userCanAddTransaction}
+              />
+              <div className="grid grid-cols-1 gap-6 sm:h-full sm:grid-cols-1 sm:overflow-hidden xl:grid-cols-3 xl:grid-rows-1">
+                <TransactionsPieChart {...dashboard} />
+                <ExpensesPerCategory
+                  expensesPerCategory={dashboard.totalExpensePerCategory}
+                />
+              </div>
+            </div>
+
+            <LastTransactions lastTransactions={dashboard.lastTransactions} />
+          </div>
         </div>
-      </div>
+      </ScrollArea>
     </>
   );
 };

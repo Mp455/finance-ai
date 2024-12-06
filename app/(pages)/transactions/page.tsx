@@ -9,6 +9,10 @@ import { auth } from "@clerk/nextjs/server";
 import { ScrollArea } from "@/app/_components/ui/scroll-area";
 import { canUserAddTransaction } from "@/app/_data/can-user-add-transaction";
 
+export const metadata = {
+  title: "Transações",
+};
+
 const TransactionsPage = async () => {
   const { userId } = await auth();
 
