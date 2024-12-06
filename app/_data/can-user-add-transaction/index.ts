@@ -7,9 +7,10 @@ export const canUserAddTransaction = async () => {
     throw new Error("Unauthorized");
   }
 
-  const user = await clerkClient.users.getUser(userId);
+  const user = await clerkClient().users.getUser(userId);
+  console.log(user, "aaa");
 
-  if (user.publicMetadata.subscriptionPlan === "Premium") {
+  if (user.publicMetadata.subscriptionPlan === "premium") {
     return true;
   }
   const currentMonthTransactions = await getCurrentMonthTransactions();
