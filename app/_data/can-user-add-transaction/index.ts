@@ -8,7 +8,6 @@ export const canUserAddTransaction = async () => {
   }
 
   const user = await clerkClient().users.getUser(userId);
-  console.log(user, "aaa");
 
   if (user.publicMetadata.subscriptionPlan === "premium") {
     return true;
