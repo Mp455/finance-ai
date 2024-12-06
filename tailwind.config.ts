@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: { max: "639px" },
+      },
       colors: {
         danger: "hsl(var(--danger))",
         background: "hsl(var(--background))",
