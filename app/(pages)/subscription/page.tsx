@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import AquirePlanButton from "./_components/aquire-plan-button";
 import { Badge } from "@/app/_components/ui/badge";
 import { getCurrentMonthTransactions } from "@/app/_data/get-month-transactions";
+import { ScrollArea } from "@/app/_components/ui/scroll-area";
 
 export const metadata = {
   title: "Assinatura",
@@ -25,7 +26,7 @@ const SubscriptionPage = async () => {
     <>
       <Navbar />
 
-      <div className="space-y-6 p-6">
+      <ScrollArea className="space-y-6 p-6">
         <h1 className="text-2xl font-bold">Assinatura</h1>
         <div className="flex gap-6 xs:flex-wrap">
           <Card className="sm:w-[450px] xs:w-[350px]">
@@ -82,7 +83,7 @@ const SubscriptionPage = async () => {
             </CardContent>
           </Card>
         </div>
-      </div>
+      </ScrollArea>
     </>
   );
 };

@@ -11,6 +11,7 @@ import Navbar from "@/app/_components/navbar";
 import { getDashboard } from "@/app/_data/get-dashboard";
 import { canUserAddTransaction } from "@/app/_data/can-user-add-transaction";
 import AiReportButton from "./_components/ai-report-button";
+import { ScrollArea, ScrollBar } from "@/app/_components/ui/scroll-area";
 
 interface HomeProps {
   searchParams: {
@@ -35,10 +36,10 @@ const Home = async ({ searchParams: { month } }: HomeProps) => {
   return (
     <>
       <Navbar />
-      <div className="flex h-full flex-col space-y-6 overflow-hidden p-6">
+      <ScrollArea className="flex h-full flex-col space-y-6 sm:p-6 xl:overflow-hidden">
         <div className="flex justify-between">
           <h1 className="text-2xl font-bold">Dashboard</h1>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1 sm:gap-3">
             <AiReportButton
               month={month}
               hasPremiumPlan={
@@ -48,14 +49,14 @@ const Home = async ({ searchParams: { month } }: HomeProps) => {
             <TimeSelect />
           </div>
         </div>
-        <div className="grid h-full grid-cols-[2fr,1fr] gap-6 overflow-hidden">
-          <div className="flex flex-col gap-6 overflow-hidden">
+        <div className="grid h-full gap-6 xl:grid-cols-[2fr,1fr] xl:overflow-hidden">
+          <div className="flex flex-col gap-6 xl:overflow-hidden">
             <SummaryCards
               month={month}
               {...dashboard}
               userCanAddTransaction={userCanAddTransaction}
             />
-            <div className="grid h-full grid-cols-3 grid-rows-1 gap-6 overflow-hidden">
+            <div className="grid h-full gap-6 lg:grid-cols-2 xl:grid-cols-3 xl:grid-rows-1 xl:overflow-hidden">
               <TransactionsPieChart {...dashboard} />
               <ExpensesPerCategory
                 expensesPerCategory={dashboard.totalExpensePerCategory}
@@ -64,7 +65,8 @@ const Home = async ({ searchParams: { month } }: HomeProps) => {
           </div>
           <LastTransactions lastTransactions={dashboard.lastTransactions} />
         </div>
-      </div>
+        <ScrollBar orientation="horizontal" className="hidden sm:inline" />
+      </ScrollArea>
     </>
   );
 };

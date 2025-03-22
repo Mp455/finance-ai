@@ -37,7 +37,7 @@ const LastTransactions = ({ lastTransactions }: LastTransactionsProps) => {
         </Button>
       </CardHeader>
       <ScrollArea className="h-[82%] pr-3">
-        <CardContent className="scrollbar-custom h-full space-y-6 overflow-auto">
+        <CardContent className="h-full space-y-6 overflow-auto">
           {lastTransactions.length > 0 ? (
             lastTransactions.map((transaction) => (
               <div
@@ -81,7 +81,7 @@ const LastTransactions = ({ lastTransactions }: LastTransactionsProps) => {
               </div>
             ))
           ) : (
-            <div className="flex h-[300px] items-center justify-center gap-2 whitespace-nowrap">
+            <div className="flex h-[300px] items-center justify-center gap-2">
               <h2 className="text-xl text-[#71717A]">
                 Você não possui nenhuma transação cadastrada neste mês.
               </h2>
