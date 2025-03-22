@@ -12,7 +12,7 @@ const PercentageItem = ({ icon, title, value }: PercentageItemProps) => {
         <p className="text-sm text-muted-foreground">{title}</p>
       </div>
 
-      <p className="text-sm font-bold">{value}%</p>
+      <p className="text-sm font-bold">{isNaN(value) ? 0 : value}%</p>
     </div>
   );
 };

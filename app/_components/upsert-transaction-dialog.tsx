@@ -92,6 +92,8 @@ const UpsertTransactionDialog = ({
       paymentMethod: TransactionPaymentMethod.OTHER,
       date: new Date(),
     },
+    mode: "onChange",
+    criteriaMode: "all",
   });
 
   const onSubmit = async (data: FormSchema) => {
@@ -251,7 +253,7 @@ const UpsertTransactionDialog = ({
               name="date"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Método de Pagamento</FormLabel>
+                  <FormLabel>Data</FormLabel>
                   <DatePicker value={field.value} onChange={field.onChange} />
                   <FormMessage />
                 </FormItem>

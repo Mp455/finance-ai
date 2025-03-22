@@ -1,5 +1,4 @@
 "use client";
-import { Pie, PieChart } from "recharts";
 
 import { Card, CardContent } from "@/app/_components/ui/card";
 import {
@@ -8,9 +7,10 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/app/_components/ui/chart";
-import { TransactionType } from "@prisma/client";
 import { TransactionPercentagePerType } from "@/app/_data/get-dashboard/types";
+import { TransactionType } from "@prisma/client";
 import { PiggyBankIcon, TrendingDownIcon, TrendingUpIcon } from "lucide-react";
+import { Pie, PieChart } from "recharts";
 import PercentageItem from "./percentage-item";
 
 const chartConfig = {
@@ -28,38 +28,44 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-interface TransactionPierChartProps {
+interface TransactionsPierChartProps {
   typesPercentage: TransactionPercentagePerType;
   expensesTotal: number;
   investmentsTotal: number;
   depositsTotal: number;
 }
 
-const TransactionPieChart = ({
+const TransactionsPieChart = ({
   expensesTotal,
   investmentsTotal,
   depositsTotal,
   typesPercentage,
-}: TransactionPierChartProps) => {
-  const chartData = [
-    {
-      type: TransactionType.DEPOSIT,
-      amount: depositsTotal,
-      fill: "#55B02E",
-    },
-    {
-      type: TransactionType.EXPENSE,
-      amount: expensesTotal,
-      fill: "#E93030",
-    },
-    {
-      type: TransactionType.INVESTMENT,
-      amount: investmentsTotal,
-      fill: "#FFFFFF",
-    },
-  ];
+}: TransactionsPierChartProps) => {
+  const isEmpty =
+    expensesTotal === 0 && depositsTotal === 0 && investmentsTotal === 0;
+
+  const chartData = isEmpty
+    ? [{ type: "Sem transações", amount: 1, fill: "#71717A" }]
+    : [
+        {
+          type: TransactionType.DEPOSIT,
+          amount: depositsTotal,
+          fill: "#55B02E",
+        },
+        {
+          type: TransactionType.EXPENSE,
+          amount: expensesTotal,
+          fill: "#E93030",
+        },
+        {
+          type: TransactionType.INVESTMENT,
+          amount: investmentsTotal,
+          fill: "#FFFFFF",
+        },
+      ];
+
   return (
-    <Card className="flex flex-col p-6">
+    <Card className="flex flex-col px-2 pb-5">
       <CardContent className="flex-1 pb-0">
         <ChartContainer
           config={chartConfig}
@@ -70,14 +76,16 @@ const TransactionPieChart = ({
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
+
             <Pie
               data={chartData}
               dataKey="amount"
               nameKey="type"
-              innerRadius={60}
+              innerRadius={80}
             />
           </PieChart>
         </ChartContainer>
+
         <div className="space-y-1">
           <PercentageItem
             icon={<TrendingUpIcon size={16} className="text-primary" />}
@@ -100,4 +108,4 @@ const TransactionPieChart = ({
   );
 };
 
-export default TransactionPieChart;
+export default TransactionsPieChart;
