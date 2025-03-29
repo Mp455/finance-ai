@@ -41,6 +41,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { upsertTransaction } from "../_actions/upsert-transaction";
+import { useEffect } from "react";
 
 interface UpsertTransactionDialogProps {
   isOpen: boolean;
@@ -95,6 +96,15 @@ const UpsertTransactionDialog = ({
     mode: "onChange",
     criteriaMode: "all",
   });
+
+  useEffect(() => {
+    if (isOpen && defaultValues) {
+      form.reset({
+        ...defaultValues,
+        date: defaultValues.date ? new Date(defaultValues.date) : new Date(),
+      });
+    }
+  }, [isOpen, defaultValues, form]);
 
   const onSubmit = async (data: FormSchema) => {
     try {
