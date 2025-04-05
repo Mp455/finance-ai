@@ -9,13 +9,15 @@ export const getDashboard = async (month: string, year: number) => {
   if (!userId) {
     throw new Error("Unauthorized");
   }
-  const formattedMonth = month.padStart(2, "0");
+
+  const start = new Date(Date.UTC(year, Number(month) - 1, 1));
+  const end = new Date(Date.UTC(year, Number(month), 1));
 
   const where = {
     userId,
     date: {
-      gte: new Date(`${year}-${formattedMonth}-01`),
-      lt: new Date(`${year}-${formattedMonth}-31`),
+      gte: start,
+      lt: end,
     },
   };
 

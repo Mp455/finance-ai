@@ -8,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/app/_components/ui/select";
+import { Filter } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
@@ -80,12 +81,9 @@ const TimeSelect = ({ availableYears }: TimeSelectProps) => {
         </SelectContent>
       </Select>
 
-      <Button
-        onClick={handleMonthChange}
-        className="rounded-full"
-        variant="outline"
-      >
+      <Button onClick={handleMonthChange} className="rounded-full">
         Filtrar
+        <Filter />
       </Button>
     </>
   );

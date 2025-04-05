@@ -46,7 +46,7 @@ const Home = async ({ searchParams: { month, year } }: HomeProps) => {
     <>
       <Navbar />
       <ScrollArea className="flex h-full flex-col space-y-6 sm:p-6 xl:overflow-hidden">
-        <div className="flex justify-between">
+        <div className="my-5 flex flex-wrap justify-between">
           <h1 className="text-2xl font-bold">Dashboard</h1>
           <div className="flex items-center gap-1 sm:gap-3">
             <AiReportButton
