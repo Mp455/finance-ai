@@ -46,20 +46,23 @@ const Home = async ({ searchParams: { month, year } }: HomeProps) => {
     <>
       <Navbar />
       <ScrollArea className="flex h-full flex-col space-y-6 sm:p-6 xl:overflow-hidden">
-        <div className="my-5 flex flex-wrap justify-between">
-          <h1 className="text-2xl font-bold">Dashboard</h1>
-          <div className="flex items-center gap-1 sm:gap-3">
+        <div className="mx-3 my-5 flex flex-wrap justify-between gap-3 sm:mx-0 md:mx-0">
+          <div className="flex w-full justify-between">
+            <h1 className="text-2xl font-bold">Dashboard</h1>
             <AiReportButton
               month={month}
               hasPremiumPlan={
                 user.publicMetadata.subscriptionPlan === "premium"
               }
             />
+          </div>
+
+          <div className="grid w-full grid-cols-3 items-center justify-center sm:flex sm:grid-cols-none sm:gap-3 md:justify-end">
             <TimeSelect availableYears={availableYears} />
           </div>
         </div>
         <div className="grid h-full gap-6 xl:grid-cols-[2fr,1fr] xl:overflow-hidden">
-          <div className="flex flex-col gap-6 xl:overflow-hidden">
+          <div className="flex flex-col gap-6 sm:mx-0 xl:overflow-hidden xs:mx-1">
             <SummaryCards
               month={month}
               {...dashboard}
