@@ -8,24 +8,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/app/_components/ui/select";
+import { MONTH_OPTIONS } from "@/app/_constants/month-options";
 import { Filter } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-
-const MONTH_OPTIONS = [
-  { value: "01", label: "Janeiro" },
-  { value: "02", label: "Fevereiro" },
-  { value: "03", label: "Março" },
-  { value: "04", label: "Abril" },
-  { value: "05", label: "Maio" },
-  { value: "06", label: "Junho" },
-  { value: "07", label: "Julho" },
-  { value: "08", label: "Agosto" },
-  { value: "09", label: "Setembro" },
-  { value: "10", label: "Outubro" },
-  { value: "11", label: "Novembro" },
-  { value: "12", label: "Dezembro" },
-];
 
 interface TimeSelectProps {
   availableYears: number[];
@@ -34,6 +20,7 @@ interface TimeSelectProps {
 const TimeSelect = ({ availableYears }: TimeSelectProps) => {
   const { push } = useRouter();
   const searchParams = useSearchParams();
+  const pathname = usePathname();
 
   const month =
     searchParams.get("month") ||
@@ -44,8 +31,10 @@ const TimeSelect = ({ availableYears }: TimeSelectProps) => {
   const [selectedYear, setSelectedYear] = useState(year);
 
   const handleMonthChange = () => {
-    push(`/?month=${selectedMonth}&year=${selectedYear}`);
+    push(`${pathname}?month=${selectedMonth}&year=${selectedYear}`);
   };
+
+  const verifyRoute = pathname === "/";
   return (
     <>
       <Select
@@ -80,6 +69,13 @@ const TimeSelect = ({ availableYears }: TimeSelectProps) => {
           ))}
         </SelectContent>
       </Select>
+      <Button
+        variant="outline"
+        className={`rounded-full ${verifyRoute ? "hidden" : ""}`}
+        onClick={() => push(pathname)}
+      >
+        Limpar Filtros
+      </Button>
 
       <Button onClick={handleMonthChange} className="rounded-full">
         Filtrar
